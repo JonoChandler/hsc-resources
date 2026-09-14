@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Notes — HSC resources by subject</title>
+<meta name="description" content="Practice papers, notes, and past HSC questions organised by subject and topic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="site-title">Study Notes <span>for the HSC</span></a>
+    <nav class="site-nav">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="library.html">Library</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Notes and practice papers, sorted by subject.</h1>
+      <p>A shared library of HSC study resources — organised by subject and topic, so you can find what you need before it's due, not the night before.</p>
+      <form class="hero-search" action="library.html" method="get">
+        <label for="hero-q" class="visually-hidden" style="position:absolute;left:-9999px;">Search resources</label>
+        <input id="hero-q" name="q" type="text" placeholder="Search by subject, topic, or title…" autocomplete="off">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="contents" id="subjects">
+    <div class="wrap">
+      <p class="contents-heading">Contents</p>
+      <ul class="toc-list" id="toc-list"></ul>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="wrap">
+      <p class="contents-heading">How it works</p>
+      <div class="how-grid">
+        <div class="how-item">
+          <h3>Pick a subject</h3>
+          <p>Browse the contents above or jump straight into the library and filter by subject and topic.</p>
+        </div>
+        <div class="how-item">
+          <h3>Find the right resource</h3>
+          <p>Each entry is tagged as notes, a summary, a practice paper, or past HSC questions, so you know what you're getting.</p>
+        </div>
+        <div class="how-item">
+          <h3>Download and go</h3>
+          <p>Every resource is a straightforward PDF download — no sign-up, no account needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    Study Notes for the HSC — built by students, for students.
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  const tocList = document.getElementById('toc-list');
+  const counts = {};
+  RESOURCES.forEach(r => { counts[r.subject] = (counts[r.subject] || 0) + 1; });
+
+  SUBJECTS.forEach(subject => {
+    const count = counts[subject.slug] || 0;
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <a href="library.html?subject=${subject.slug}">
+        <span class="toc-name">${subject.name}</span>
+        <span class="toc-leader"></span>
+        <span class="toc-count">${count} resource${count === 1 ? '' : 's'}</span>
+      </a>
+    `;
+    tocList.appendChild(li);
+  });
+</script>
+</body>
+</html>
