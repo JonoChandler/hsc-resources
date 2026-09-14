@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subject — Study Notes for the HSC</title>
+<meta name="description" content="Modules and past papers for this subject.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="site-title">Study Notes <span>for the HSC</span></a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="library.html">Library</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="breadcrumb" id="breadcrumb"></p>
+    <h1 class="page-title" id="subject-heading"></h1>
+    <p class="page-subtitle" id="subject-subtitle"></p>
+
+    <p class="contents-heading" id="modules-heading"></p>
+    <div class="button-grid" id="module-buttons"></div>
+
+    <p class="contents-heading" id="papers-heading">Past papers</p>
+    <div class="button-grid" id="paper-buttons"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    Study Notes for the HSC — built by students, for students.
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const year = params.get('year') === '11' ? 11 : 12;
+  const subjectSlug = params.get('subject');
+  const subject = subjectBySlug(subjectSlug);
+
+  if (!subject || !subject.years[year]) {
+    document.querySelector('main .wrap').innerHTML = `
+      <p class="breadcrumb"><a href="index.html">Home</a> <span aria-hidden="true">/</span> <a href="subjects.html?year=${year}">Year ${year}</a></p>
+      <h1 class="page-title">Subject not found</h1>
+      <p class="page-subtitle">That subject isn't listed for Year ${year}. <a href="subjects.html?year=${year}">Back to Year ${year} subjects</a>.</p>
+    `;
+  } else {
+    const yearData = subject.years[year];
+
+    document.getElementById('breadcrumb').innerHTML = `
+      <a href="index.html">Home</a> <span aria-hidden="true">/</span>
+      <a href="subjects.html?year=${year}">Year ${year}</a> <span aria-hidden="true">/</span>
+      <span>${subject.name}</span>
+    `;
+    document.getElementById('subject-heading').textContent = subject.name;
+    document.getElementById('subject-subtitle').textContent = `Year ${year} — ${year === 11 ? 'Preliminary' : 'HSC'} course`;
+    document.getElementById('modules-heading').textContent = `${subject.unitLabel}s`;
+
+    const moduleContainer = document.getElementById('module-buttons');
+    yearData.modules.forEach(topic => {
+      const a = document.createElement('a');
+      a.className = 'grid-btn';
+      a.href = `library.html?subject=${subject.slug}&year=${year}&topic=${encodeURIComponent(topic)}`;
+      a.textContent = topic;
+      moduleContainer.appendChild(a);
+    });
+
+    const paperContainer = document.getElementById('paper-buttons');
+    yearData.paperTypes.forEach(paperType => {
+      const a = document.createElement('a');
+      a.className = 'grid-btn grid-btn-paper';
+      a.href = `library.html?subject=${subject.slug}&year=${year}&topic=${encodeURIComponent(paperType)}`;
+      a.textContent = paperType;
+      paperContainer.appendChild(a);
+    });
+  }
+</script>
+</body>
+</html>
