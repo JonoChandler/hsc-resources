@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library — Study Notes for the HSC</title>
+<meta name="description" content="Browse HSC practice papers, notes, and past questions by year, subject, and topic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="site-title">Study Notes <span>for the HSC</span></a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="library.html" aria-current="page">Library</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="breadcrumb" id="breadcrumb"></p>
+    <div class="library-header">
+      <h1 id="library-heading">Library</h1>
+      <p id="library-subtitle">Filter by year, subject, or resource type, or search by title. Every download opens as a PDF.</p>
+    </div>
+  </div>
+
+  <div class="wrap library" id="library-body">
+    <aside class="filters" id="filters-panel">
+      <div class="filter-group">
+        <h4>Search</h4>
+        <input type="text" id="search-input" placeholder="Search titles…" style="width:100%; padding:9px 10px; border:1px solid var(--line); font-family: var(--font-body); font-size:14px; background:#fff;">
+      </div>
+      <div class="filter-group">
+        <h4>Year</h4>
+        <div id="year-filters"></div>
+      </div>
+      <div class="filter-group">
+        <h4>Subject</h4>
+        <div id="subject-filters"></div>
+      </div>
+      <div class="filter-group">
+        <h4>Resource type</h4>
+        <div id="type-filters"></div>
+      </div>
+      <button id="clear-filters">Clear all filters</button>
+    </aside>
+
+    <div class="results">
+      <p class="results-meta" id="results-meta"></p>
+      <ul class="resource-list" id="resource-list"></ul>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    Study Notes for the HSC — built by students, for students.
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

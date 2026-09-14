@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subjects — Study Notes for the HSC</title>
+<meta name="description" content="Choose a subject to see its modules and past papers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="site-title">Study Notes <span>for the HSC</span></a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="library.html">Library</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">Home</a> <span aria-hidden="true">/</span> <span id="year-crumb"></span></p>
+    <h1 class="page-title" id="year-heading"></h1>
+    <p class="page-subtitle" id="year-subtitle"></p>
+
+    <ul class="toc-list" id="subject-toc"></ul>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    Study Notes for the HSC — built by students, for students.
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const year = params.get('year') === '11' ? 11 : 12;
+
+  document.getElementById('year-crumb').textContent = `Year ${year}`;
+  document.getElementById('year-heading').textContent = `Year ${year}`;
+  document.getElementById('year-subtitle').textContent = year === 11
+    ? 'Preliminary course — pick a subject to see its modules and Prelim papers.'
+    : 'HSC course — pick a subject to see its modules, Trial papers, and HSC papers.';
+
+  const list = document.getElementById('subject-toc');
+  const available = SUBJECTS.filter(s => s.years[year]);
+
+  if (available.length === 0) {
+    list.innerHTML = `<li class="empty-state"><strong>No subjects listed for this year yet.</strong></li>`;
+  }
+
+  available.forEach(subject => {
+    const yearData = subject.years[year];
+    const moduleCount = yearData.modules.length;
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <a href="subject.html?year=${year}&subject=${subject.slug}">
+        <span class="toc-name">${subject.name}</span>
+        <span class="toc-leader"></span>
+        <span class="toc-count">${moduleCount} ${subject.unitLabel.toLowerCase()}${moduleCount === 1 ? '' : 's'}</span>
+      </a>
+    `;
+    list.appendChild(li);
+  });
+</script>
+</body>
+</html>
