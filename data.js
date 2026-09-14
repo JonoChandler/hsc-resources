@@ -47,7 +47,9 @@ const RESOURCES = [
   { subject: "maths-advanced", topic: "Exponential and Logarithmic Functions", title: "Log laws worked examples", type: "Notes", file: "resources/maths-advanced/log-laws-examples.pdf" },
 
   // Maths Extension 1
-  { subject: "maths-ext1", topic: "Proof", title: "Mathematical induction step-by-step", type: "Notes", file: "resources/maths-ext1/induction-notes.pdf" },
+  { subject: "maths-ext1", topic: "Proof", title: "Mathematical Induction - Challenging Questions", type: "Worksheet", file: "resources/maths-ext1/Mathematical Induction - Challenging Questions.pdf" },
+  { subject: "maths-ext1", topic: "Proof", title: "Mathematical Induction - Divisibility Questions", type: "Worksheet", file: "resources/maths-ext1/Mathematical Induction - Divisibility Questions.pdf" },
+  { subject: "maths-ext1", topic: "Proof", title: "Mathematical Induction - Summation Questions", type: "Worksheet", file: "resources/maths-ext1/Mathematical Induction - Summation Questions.pdf" },
   { subject: "maths-ext1", topic: "Vectors", title: "Vector proofs practice set", type: "Practice Paper", file: "resources/maths-ext1/vectors-practice.pdf" },
   { subject: "maths-ext1", topic: "Combinatorics", title: "Permutations and combinations summary", type: "Summary", file: "resources/maths-ext1/combinatorics-summary.pdf" },
   { subject: "maths-ext1", topic: "Further Calculus", title: "Integration techniques worked solutions", type: "Notes", file: "resources/maths-ext1/further-calculus-solutions.pdf" },
